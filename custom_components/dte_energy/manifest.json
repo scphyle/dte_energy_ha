@@ -1,10 +1,14 @@
 {
   "domain": "dte_energy",
   "name": "DTE Energy",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "documentation": "https://github.com/scphyle/dte_energy_ha",
-  "requirements": [],
+  "requirements": [
+    "aiohttp>=3.8.0"
+  ],
   "dependencies": [],
   "codeowners": ["@scphyle"],
-  "iot_class": "cloud_polling"
+  "iot_class": "cloud_polling",
+  "config_flow": true,
+  "homeassistant": "2024.1.0"
 }
