@@ -1,9 +1,10 @@
 import voluptuous as vol
+import logging
 from homeassistant import config_entries
-from homeassistant.core import callback
 
 from .const import DOMAIN, CONF_WEB_SECURITY_TOKEN, CONF_ACCOUNT_NUMBER
 
+_LOGGER = logging.getLogger(__name__)
 
 class DTEEnergyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
@@ -12,21 +13,38 @@ class DTEEnergyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
 
         if user_input is not None:
-            # Basic validation — try a token refresh to verify the token works
             import aiohttp
             try:
                 async with aiohttp.ClientSession() as session:
+                    # Step 1: Refresh the token they pasted
                     async with session.get(
-                        "https://newlook.dteenergy.com/api/tokenRefresh",
-                        cookies={"webSecurityToken": user_input[CONF_WEB_SECURITY_TOKEN]},
+                            "https://newlook.dteenergy.com/api/tokenRefresh",
+                            cookies={"webSecurityToken": user_input[CONF_WEB_SECURITY_TOKEN]},
                     ) as resp:
-                        if resp.status == 200:
-                            data = await resp.json()
-                            # Store the fresh token instead of the one they pasted
-                            user_input[CONF_WEB_SECURITY_TOKEN] = data["webSecurityToken"]
-                        else:
+                        _LOGGER.error("tokenRefresh status: %s", resp.status)
+                        if resp.status != 200:
+                            body = await resp.text()
+                            _LOGGER.error("tokenRefresh body: %s", body)
                             errors["base"] = "invalid_token"
-            except Exception:
+                        else:
+                            data = await resp.json()
+                            fresh_token = data["webSecurityToken"]
+
+                    if not errors:
+                        # Step 2: Verify we can get a bearer token with it
+                        async with session.get(
+                                "https://newlook.dteenergy.com/api/getUserDetails",
+                                cookies={"webSecurityToken": fresh_token},
+                        ) as resp:
+                            _LOGGER.error("getUserDetails status: %s", resp.status)
+                            if resp.status != 200:
+                                errors["base"] = "invalid_token"
+                            else:
+                                # All good, store the fresh token
+                                user_input[CONF_WEB_SECURITY_TOKEN] = fresh_token
+
+            except Exception as e:
+                _LOGGER.error("DTE connection exception: %s", str(e))
                 errors["base"] = "cannot_connect"
 
             if not errors:
