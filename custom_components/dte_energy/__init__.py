@@ -3,8 +3,8 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 
-from const import DOMAIN, PLATFORMS, CONF_WEB_SECURITY_TOKEN, CONF_ACCOUNT_NUMBER
-from coordinator import DTEDataCoordinator
+from .const import DOMAIN, PLATFORMS, CONF_WEB_SECURITY_TOKEN, CONF_ACCOUNT_NUMBER
+from .coordinator import DTEDataCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
