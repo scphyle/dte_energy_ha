@@ -5,6 +5,6 @@
   "documentation": "https://git.tazhome.net/chas/dte_energy_ha",
   "requirements": [],
   "dependencies": [],
-  "codeowners": ["@chas"],
+  "codeowners": ["@scphyle"],
   "iot_class": "cloud_polling"
 }
