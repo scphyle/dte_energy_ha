@@ -1,0 +1,28 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DTE Energy Setup",
+        "description": "Log into newlook.dteenergy.com, then open DevTools (F12) → Application → Cookies and copy the webSecurityToken value.",
+        "data": {
+          "web_security_token": "Web Security Token",
+          "account_number": "Account Number"
+        }
+      },
+      "reauth": {
+        "title": "Re-authenticate DTE Energy",
+        "description": "Your session has expired. Please log in again and paste a fresh webSecurityToken.",
+        "data": {
+          "web_security_token": "Web Security Token"
+        }
+      }
+    },
+    "error": {
+      "invalid_token": "Invalid token — please check you copied the full webSecurityToken value.",
+      "cannot_connect": "Could not connect to DTE Energy. Check your network and try again."
+    },
+    "abort": {
+      "reauth_successful": "Re-authentication successful!"
+    }
+  }
+}

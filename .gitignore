@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# PyCharm
+.idea/
+
+# Test files with real tokens
+custom_components/dte_energy/test_api.py
+
+# Just in case
+*.env
+.env
