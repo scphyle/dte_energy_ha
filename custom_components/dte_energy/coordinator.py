@@ -8,8 +8,7 @@ import aiohttp
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from custom_components.dte_energy.const import APIM_SUBSCRIPTION_KEY
-from custom_components.dte_energy.const import (
+from .const import (
     DOMAIN,
     SCAN_INTERVAL_MINUTES,
     TOKEN_REFRESH_BUFFER_SECONDS,
@@ -17,6 +16,7 @@ from custom_components.dte_energy.const import (
     URL_USER_DETAILS,
     URL_BILL_DATA,
     URL_USAGE,
+    APIM_SUBSCRIPTION_KEY
 )
 
 _LOGGER = logging.getLogger(__name__)

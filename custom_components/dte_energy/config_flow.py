@@ -2,7 +2,7 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
 
-from const import DOMAIN, CONF_WEB_SECURITY_TOKEN, CONF_ACCOUNT_NUMBER
+from .const import DOMAIN, CONF_WEB_SECURITY_TOKEN, CONF_ACCOUNT_NUMBER
 
 
 class DTEEnergyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):

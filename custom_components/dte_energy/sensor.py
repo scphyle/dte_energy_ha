@@ -9,8 +9,8 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from custom_components.dte_energy.const import DOMAIN
-from custom_components.dte_energy.coordinator import DTEDataCoordinator
+from .const import DOMAIN
+from .coordinator import DTEDataCoordinator
 
 
 async def async_setup_entry(
