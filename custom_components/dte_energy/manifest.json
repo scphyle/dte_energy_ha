@@ -2,7 +2,7 @@
   "domain": "dte_energy",
   "name": "DTE Energy",
   "version": "0.1.0",
-  "documentation": "https://git.tazhome.net/chas/dte_energy_ha",
+  "documentation": "https://github.com/scphyle/dte_energy_ha",
   "requirements": [],
   "dependencies": [],
   "codeowners": ["@scphyle"],
